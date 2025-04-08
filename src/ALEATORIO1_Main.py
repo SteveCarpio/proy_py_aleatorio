@@ -1,9 +1,7 @@
 ### Creado por: SteveCarpio-2024 ###
-import pandas as pd
-import numpy as np
-import chardet
 
-from datetime import datetime as dt
+from   cfg.ALEATORIO_librerias import *
+import cfg.ALEATORIO_variables as sTv
 
 
 #### -----------------------------------------------------------------------------
@@ -11,7 +9,7 @@ print(f'------------- [ Inicio - {dt.now()} ]------------- \n')
 importe_Fijado   = 600000000      # Máximo importe total acumulado
 num_Simulaciones = 20000           # Número de Simulaciones 
 diferencia_Menor = 10             # Es el valor más bajo para crear los Excel
-diferencia_Stop  = 1              # Es el valor más desable, hará un stop del proceso
+diferencia_Stop  = 1              # Es el valor más deseable, hará un stop del proceso
 ruta_Raiz        = f'C:\\MisCompilados\\PRO_SABADELL_RANDOM\\'
 nombre_Entrada   = f"A_OK_20241209"
 nombre_Salida    = f"{nombre_Entrada}" 
@@ -29,12 +27,12 @@ def PROC_Ver_Tamano_Objetos(nombre,objeto,opcion):
         tamaño_array_mb = tamaño_array_bytes / (1024 * 1024)  # Convertir a MB
         #print(f'Tamaño en memoria del array ({nombre}): {tamaño_array_mb:.2f} MB')
 
-# --- Funcion que ejecuta un algoritmo y crea un Array.Numpy con los reg Aleatorios
+# --- Función que ejecuta un algoritmo y crea un Array.Numpy con los reg Aleatorios
 def PROC_Crea_Seleccion_Aleatoria3(ar):
 
     # Baraja el array de NumPy
     np.random.shuffle(ar)
-    # Crea un Array.Numpy vacio con la longitud de 'ar'
+    # Crea un Array.Numpy vació con la longitud de 'ar'
     seleccionados = np.empty((len(ar), ar.shape[1]))
     suma = 0
     count = 0
@@ -48,14 +46,14 @@ def PROC_Crea_Seleccion_Aleatoria3(ar):
                 count += 1
             if suma >= importe_Fijado:
                 break
-    # Redimenciona el array solo con los filas incluidas
+    # Re dimensiona el array solo con los filas incluidas
     seleccionados = seleccionados[:count]
     # Devolvemos el Array.Numpy y la Suma acumulada
     del ar
     # Retornamos el resultado
     return seleccionados, suma 
 
-# --- Funcion que nos sirve para importar el fichero de entrada .txt
+# --- Función que nos sirve para importar el fichero de entrada .txt
 def PROC_Importa_txt():
     
     # Inicializar listas vacías para cada campo
@@ -96,13 +94,13 @@ def PROC_Importa_txt():
     print(f"Importación del Fichero : {nombre_Entrada}.txt \nEncoding : {encoding}\n")
     return df
 
-# --- Funcion que nos quita los prestamos que no queremos a partor de un excel
+# --- Función que nos quita los prestamos que no queremos a partir de un excel
 def PROC_Quita_Prestamo(df1):
 
     # Leemos el excel de PRESTAMOS a eliminar
     df2= pd.read_excel(f'{ruta_Raiz}CONFIG\\QUITAR_PRESTAMOS.xlsx')
     
-    # Quitamos los "0" de la varable ID
+    # Quitamos los "0" de la variable ID
     df1['ID'] = df1['ID'].astype(str)       # Convertir 'ID' de DF1 a tipo str
     df1['ID'] = df1['ID'].str.lstrip('0')   # Eliminar ceros a la izquierda de la columna 'ID'
     df2['ID'] = df2['ID'].astype(str)       # Convertir 'ID' de DF2 a tipo str
@@ -149,14 +147,14 @@ for i in range(1,num_Simulaciones+1):
     # Exporto resultado con los valores de Salida en un CSV
     if importe_Fijado - suma < diferencia_Menor:
         sw=1
-        # Convieto el Array.Numpy en un DataFrame
+        # Convierto el Array.Numpy en un DataFrame
         df_Resultado = pd.DataFrame(ar_Resultado, columns=['ID', 'TOTAL'])
 
         # Exporto el DataFrame a un excel
         df_Resultado.to_excel(f'{ruta_Raiz}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}.xlsx',index=False)
 
         # Mostrar resultados
-        print(f"--------------------- Simulacion Número: {i}")
+        print(f"--------------------- Simulación Número: {i}")
         print(f'Num Reg TEntrada   : {len(df_tmp)}')
         print(f'Num Reg TSalida    : {len(df_Resultado)}')
         print(f'Importe Total      : {var_total}')

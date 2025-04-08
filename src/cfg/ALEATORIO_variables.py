@@ -9,6 +9,7 @@
 # ----------------------------------------------------------------------------------------
 var_RutaRaiz='C:\\MisCompilados\\PROY_ALEATORIO\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
+var_RutaInforme=f'{var_RutaRaiz}CONFIG\\'
 var_RutaLog=f'{var_RutaRaiz}LOG\\'
 
 
