@@ -2,7 +2,7 @@ from   cfg.ALEATORIO_librerias import *
 import cfg.ALEATORIO_variables as sTv
 
 # --- Función que nos sirve para importar el fichero de entrada .txt
-def sTv_paso1(nombre_Entrada):
+def sTv_paso1(nombre_Entrada, nombre_Salida):
     
     print(f'\n------------- [ Paso 1 - {dt.now()} ]------------- \n')
 
@@ -39,6 +39,9 @@ def sTv_paso1(nombre_Entrada):
         'TOTAL': campo2_list #,
         #'PD': campo3_list
     })
+
+    # Exporto el DataFrame a un excel para tenerlo
+    df.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
 
     # Mostrar el DataFrame
     print(f"Importación del Fichero : {nombre_Entrada}.txt \nEncoding : {encoding}\n")
