@@ -39,20 +39,33 @@ def PROC_Crea_Seleccion_Aleatoria3(ar, importe_Fijado):
     # Retornamos el resultado
     return seleccionados, suma 
 
-def sTv_paso3(df_tmp, num_Simulaciones, importe_Fijado, diferencia_Menor, diferencia_Stop, nombre_Salida ):
+def sTv_paso3(df3, num_Simulaciones, importe_Fijado, diferencia_Menor, diferencia_Stop, nombre_Salida ):
+
+    print(f'\n------------- [ Paso 3 - {dt.now()} ]------------- \n')
+
     # Exporto el DataFrame a un excel
-    df_tmp.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
+    df3.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
 
     # Total del fichero de entrada
-    var_total = df_tmp['TOTAL'].sum()
+    var_total = df3['TOTAL'].sum()
 
     # --- Convertir el DataFrame en un Array Numpy
-    ar_tmp = df_tmp.to_numpy()
+    ar_tmp = df3.to_numpy()
 
     # --- Bucle que nos servirá para Lanzar las N Simulaciones 
     sw=0
-    print(f"Procesando ({num_Simulaciones}) simulaciones aleatorias\n")
+    print(f"Procesando ({num_Simulaciones}) simulaciones aleatorias")
+
+    simuinfo = num_Simulaciones // 5
+    trocear=0
     for i in range(1,num_Simulaciones+1):
+
+        # Mostrar avisos cada X, esta dividido x 5 las num_Simulaciones
+        trocear=trocear+1
+        if trocear == simuinfo:
+            print(f"Procesando ({i}/{num_Simulaciones}) ")
+            trocear=0
+
         # Llama func, creará un Array.Numpy con datos aleatorios con el importe fijado
         ar_Resultado, suma=PROC_Crea_Seleccion_Aleatoria3(ar_tmp, importe_Fijado)
 
@@ -66,13 +79,14 @@ def sTv_paso3(df_tmp, num_Simulaciones, importe_Fijado, diferencia_Menor, difere
             df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}.xlsx',index=False)
 
             # Mostrar resultados
-            print(f"--------------------- Simulación Número: {i}")
-            print(f'Num Reg TEntrada   : {len(df_tmp)}')
+            print(f"\n--------------------- Simulación Número: {i}")
+            print(f'Num Reg TEntrada   : {len(df3)}')
             print(f'Num Reg TSalida    : {len(df_Resultado)}')
             print(f'Importe Total      : {var_total}')
             print(f'Importe Fijado     : {importe_Fijado} ')
             print(f'Importe Conseguido : {suma}')
-            print(f'        Diferencia : {importe_Fijado - suma}\n')
+            print(f'        Diferencia : {importe_Fijado - suma}')
+            print(f"--------------------- \n")
         
         # Detener el bucle si la DIF es igual a CERO
         if importe_Fijado - suma < diferencia_Stop:
@@ -82,17 +96,20 @@ def sTv_paso3(df_tmp, num_Simulaciones, importe_Fijado, diferencia_Menor, difere
             break
 
     if sw == 0:
-        print(f'Importe Total     : {var_total}')  
-        print(f'Importe Fijado    : {importe_Fijado}')
-        print(f'Diferencia Menor  : {diferencia_Menor}')
-        print(f'Diferencia Stop   : {diferencia_Stop}\n')
+        print(f"\n----------")
+        print(f"Lo sentimos no hubo un resultado, pruebe con otro valor para:")
+        print(f"- NumSimulaciones: {num_Simulaciones}")
+        print(f"- DiferenciaMenor: {diferencia_Menor}")
+        print(f"- Diferencia Stop: {diferencia_Stop}")
+        
+        print(f'\n- Importe Fijado : {importe_Fijado}')
+        print(f'- Importe Total  : {var_total}')  
 
-        print("Vaya no hubo un resultado!\n")
-
+        
     # Invocar función para visualizar en tamaño del Objeto
-    PROC_Ver_Tamano_Objetos('df_tmp',df_tmp,1)
+    PROC_Ver_Tamano_Objetos('df_tmp',df3,1)
     PROC_Ver_Tamano_Objetos('ar_tmp',ar_tmp,2)
     PROC_Ver_Tamano_Objetos('ar_Resultado',ar_Resultado,2)
 
     # Liberar memoria de los objetos
-    del ar_tmp, ar_Resultado, df_tmp
+    del ar_tmp, ar_Resultado, df3

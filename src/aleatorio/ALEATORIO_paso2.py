@@ -4,6 +4,8 @@ import cfg.ALEATORIO_variables as sTv
 # --- Función que nos quita los prestamos que no queremos a partir de un excel
 def sTv_paso2(df1):
 
+    print(f'\n------------- [ Paso 2 - {dt.now()} ]------------- \n')
+
     # Leemos el excel de PRESTAMOS a eliminar
     df2= pd.read_excel(f'{sTv.var_RutaConfig}QUITAR_PRESTAMOS.xlsx')
     
@@ -23,4 +25,5 @@ def sTv_paso2(df1):
     print(f"Número de registros de Entrada : {len(df1)}")
     print(f"Prestamos eliminados           : {len(df2)}")
     print(f"Número de registros a Procesar : {len(df3)}\n")
+
     return df3

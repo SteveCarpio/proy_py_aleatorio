@@ -4,6 +4,8 @@ import cfg.ALEATORIO_variables as sTv
 # --- Función que nos sirve para importar el fichero de entrada .txt
 def sTv_paso1(nombre_Entrada):
     
+    print(f'\n------------- [ Paso 1 - {dt.now()} ]------------- \n')
+
     # Inicializar listas vacías para cada campo
     campo1_list = []
     campo2_list = []
@@ -40,4 +42,5 @@ def sTv_paso1(nombre_Entrada):
 
     # Mostrar el DataFrame
     print(f"Importación del Fichero : {nombre_Entrada}.txt \nEncoding : {encoding}\n")
+    print(df)
     return df
