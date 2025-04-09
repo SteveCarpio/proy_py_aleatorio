@@ -65,7 +65,7 @@ def sTv_paso4(df4, num_Simulaciones, importe_Fijado, diferencia_Menor, diferenci
         if importe_Fijado - suma < diferencia_Menor:
             sw=1
             # Exporto el DataFrame a un excel
-            df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}.xlsx',index=False)
+            df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}_pandas.xlsx',index=False)
 
             # Mostrar resultados
             print(f"\n--------------------- Simulación Número: {i}")

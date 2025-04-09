@@ -77,7 +77,7 @@ def sTv_paso3(df3, num_Simulaciones, importe_Fijado, diferencia_Menor, diferenci
             df_Resultado = pd.DataFrame(ar_Resultado, columns=['ID', 'TOTAL'])
 
             # Exporto el DataFrame a un excel
-            df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}.xlsx',index=False)
+            df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}_numpy.xlsx',index=False)
 
             # Mostrar resultados
             print(f"\n--------------------- Simulación Número: {i}")
