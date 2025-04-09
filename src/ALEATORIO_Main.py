@@ -8,13 +8,69 @@ from   aleatorio.ALEATORIO_paso4     import sTv_paso4
 # Inicializar colorama
 init(autoreset=True)
 
+# Valores por defecto
+importe_Fijado   = 600000000     # Máximo importe total acumulado
+num_Simulaciones = 5000          # Número de Simulaciones 
+diferencia_Menor = 10            # Es el valor más bajo para crear los Excel
+diferencia_Stop  = 0.5           # Es el valor más deseable, hará un stop del proceso
+
+# Solicitar datos de entrada
+v1 = input(Fore.WHITE + "Indique el Tipo de File de Entrada (CSV=1 EXCEL=2)")
+v2 = input(Fore.WHITE + "Indique el Nombre del File Entrada (sin extensión)")
+v3 = input(Fore.WHITE + "Indique el Importe Fijado:         (600.000.000  )")
+v4 = input(Fore.WHITE + "Indique el Número de Simulaciones: (5000         )")
+v5 = input(Fore.WHITE + "Indique la Diferencia Menor:       (10           )")
+v6 = input(Fore.WHITE + "Indique la Diferencia Stop:        (0.5          )")
+
 print(f'------------- [ Inicio - {dt.now()} ]------------- \n')
-importe_Fijado   = 600000000      # Máximo importe total acumulado
-num_Simulaciones = 1000          # Número de Simulaciones 
-diferencia_Menor = 200             # Es el valor más bajo para crear los Excel
-diferencia_Stop  = 0.5            # Es el valor más deseable, hará un stop del proceso
+# Evaluamos el Importe Fijado.
+try:
+    v3_int = int(v3)
+except ValueError:
+    print(f"Importe Fijado: {importe_Fijado}")
+else:
+    print(f"Importe Fijado: {v3} - nuevo")
+    importe_Fijado = int(v3)
+
+# Evaluamos Número de Simulaciones
+try:
+    v4_int = int(v4)
+except ValueError:
+    print(f"Número Simulaciones: {num_Simulaciones}")
+else:
+    print(f"Número de Simulaciones: {v4} - nuevo")
+    num_Simulaciones = int(v4)
+
+# Evaluamos la Diferencia menor
+try:
+    v5_int = int(v5)
+except ValueError:
+    print(f"Diferencia Menor: {diferencia_Menor}")
+else:
+    print(f"Diferencia Menor: {v5} - nuevo")
+    diferencia_Menor = int(v5)
+
+# Evaluamos el Diferencia Stop
+try:
+    v6_int = int(v6)  # Intenta convertir a entero
+    print(f"Diferencia Menor: {v6_int} - nuevo")
+    diferencia_Stop = int(v6)
+except ValueError:
+    try:
+        v6_float = float(v6)  # Si no es entero, intenta convertir a flotante
+        print(f"Diferencia Menor: {v6_float} - nuevo")
+        diferencia_Stop = float(v6)
+    except ValueError:
+        print(f"Diferencia Stop: {diferencia_Stop}")
+
+
+
+# Evaluamos 
 nombre_Entrada   = f"A_OK_20241209"
 nombre_Salida    = f"{nombre_Entrada}" 
+
+x = input(Fore.WHITE + "\n\nPulse una tecla para continuar.......")
+
 
 # PASO 0: Verificar datos de entrada
 #os.system("cls") 
@@ -101,7 +157,7 @@ def ejecutar_menu():
         input(Fore.WHITE + "\nProceso Finalizado, presione una techa para volver al Menú...")
 
 
-input(Fore.WHITE + "Presiona Enter para continuar...")
+#input(Fore.WHITE + "Presiona Enter para continuar...")
 ejecutar_menu()
 
 
