@@ -40,7 +40,7 @@ def PROC_Crea_Seleccion_Aleatoria4(df, importe_Fijado):
 
 def sTv_paso4(df4, num_Simulaciones, importe_Fijado, diferencia_Menor, diferencia_Stop, nombre_Salida ):
 
-    print(f'\n------------- [ Paso 4 Modelo Pandas - {dt.now()} ]------------- \n')
+    print(Fore.YELLOW + f'\n------------- [ Paso 4: Modelo Pandas - {dt.now()} ]------------- \n')
     print(f"Procesando ({num_Simulaciones}) simulaciones aleatorias")
 
     # Total del fichero de entrada
@@ -55,7 +55,7 @@ def sTv_paso4(df4, num_Simulaciones, importe_Fijado, diferencia_Menor, diferenci
         # Mostrar avisos cada X, esta dividido x 5 las num_Simulaciones
         trocear=trocear+1
         if trocear == simuinfo:
-            print(f"Procesando ({i}/{num_Simulaciones}) ")
+            print(f"Procesando ({i}/{num_Simulaciones}) - {dt.now().strftime("%H:%M")} ")
             trocear=0
 
         # Crea DF con datos aleatorios
@@ -68,31 +68,25 @@ def sTv_paso4(df4, num_Simulaciones, importe_Fijado, diferencia_Menor, diferenci
             df_Resultado.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}_Sim{i}_Dif_{importe_Fijado-suma}_pandas.xlsx',index=False)
 
             # Mostrar resultados
-            print(f"\n--------------------- Simulación Número: {i}")
+            print(Fore.YELLOW + f"\n--------------------- Simulación Número: {i}")
             print(f'Num Reg TEntrada   : {len(df4)}')
             print(f'Num Reg TSalida    : {len(df_Resultado)}')
             print(f'Importe Total      : {var_total}')
             print(f'Importe Fijado     : {importe_Fijado} ')
             print(f'Importe Conseguido : {suma}')
-            print(f'        Diferencia : {importe_Fijado - suma}')
-            print(f"--------------------- \n")
+            print(Fore.GREEN + f'        Diferencia : {importe_Fijado - suma}\n')
+            
 
         # Detener el bucle si la DIF es igual a CERO
         if importe_Fijado - suma < diferencia_Stop:
-            print(f"----------------------------------------------------------------------------------")
-            print(f"-------- ¡¡¡ Enhorabuena se encontró el valor más bajo en el Nº: {i} !!! ---------")
-            print(f"----------------------------------------------------------------------------------\n")
+            print(Fore.GREEN + f"----------------------------------------------------------------------------------")
+            print(Fore.GREEN + f"-------- ¡¡¡ Enhorabuena se encontró el valor más bajo en el Nº: {i} !!! ---------")
+            print(Fore.GREEN + f"----------------------------------------------------------------------------------\n")
             break
 
     if sw == 0:
-        print(f"\n----------")
-        print(f"Lo sentimos no hubo un resultado, pruebe con otro valor para:")
-        print(f"- NumSimulaciones: {num_Simulaciones}")
-        print(f"- DiferenciaMenor: {diferencia_Menor}")
-        print(f"- Diferencia Stop: {diferencia_Stop}")
-        
-        print(f'\n- Importe Fijado : {importe_Fijado}')
-        print(f'- Importe Total  : {var_total}')  
+        print(f"\n")
+        print(Fore.RED + f"      ¡ No hubo resultados con los valores introducidos !\n")
 
     # Invocar función para visualizar en tamaño del Objeto
     #PROC_Ver_Tamano_Objetos('df_tmp',df3,1)

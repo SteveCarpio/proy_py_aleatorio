@@ -1,3 +1,17 @@
+"""
+Programa de Selección de Números Aleatorios
+
+Este script genera simulaciones para agrupar números hasta alcanzar un importe fijado.
+Valores de entrada como: 
+- Importe máximo a alcanzar
+- Número de simulaciones
+- Diferencias mínimas esperadas
+
+Desarrollado en Python con NumPy y Pandas para cálculos y análisis de datos.
+
+Autor: SteveCarpio
+"""
+
 from   cfg.ALEATORIO_librerias import *
 from   aleatorio.ALEATORIO_paso0     import sTv_paso0
 from   aleatorio.ALEATORIO_paso1     import sTv_paso1
@@ -10,7 +24,7 @@ init(autoreset=True)
 
 # Fijamos el file de entrada
 os.system("cls") 
-print(f'------------- [ Introducir Valores de entrada de datos ]------------- \n')
+print(Fore.MAGENTA + f'------------- [ Introducir el File de Entrada ]------------- \n')
 v1 = input(Fore.WHITE + f"Indique el Tipo de File de Entrada (TXT=1 EXCEL=2)")
 v2 = input(Fore.WHITE + f"Indique el Nombre del File Entrada (sin extensión)")
 
@@ -29,14 +43,12 @@ nombre_Salida = nombre_Entrada
 
 # Valores de entrada por defecto
 importe_Fijado   = 600000000     # Máximo importe total acumulado
-num_Simulaciones = 500           # Número de Simulaciones 
-diferencia_Menor = 10            # Es el valor más bajo para crear los Excel
+num_Simulaciones = 1000          # Número de Simulaciones 
+diferencia_Menor = 20            # Es el valor más bajo para crear los Excel
 diferencia_Stop  = 0.5           # Es el valor más deseable, hará un stop del proceso
-
 
 # PASO 0: Solicitar Nuevos Valores de entrada
 importe_Fijado, num_Simulaciones, diferencia_Menor, diferencia_Stop = sTv_paso0(importe_Fijado, num_Simulaciones, diferencia_Menor, diferencia_Stop)
-
 
 def option_0():
     # PASO 1: Importamos el txt con los prestamos a un DataFrame
@@ -79,7 +91,23 @@ def option_3():
     importe_Fijado, num_Simulaciones, diferencia_Menor, diferencia_Stop = sTv_paso0(importe_Fijado, num_Simulaciones, diferencia_Menor, diferencia_Stop)
 
 def option_Help():
-    print("ayuda")
+    print(Fore.MAGENTA + "------------- [ Proceso de Selección de Números Aleatorios ] -------------  \n")
+    print(Fore.YELLOW + "Valores de Ejecución: \n")
+    print(Fore.CYAN + "- Importe Fijado: " + Fore.WHITE + "Es el importe máximo que podrá agrupar el modelo.")
+    print(Fore.CYAN + "- Num Simulaciones: "  + Fore.WHITE + "Es la cantidad de veces que el modelo generará simulaciones para alcanzar el importe fijado.")
+    print(Fore.CYAN + "- Diferencia Menor: "  + Fore.WHITE + "Es el valor mínimo esperado que puede devolver el modelo.")
+    print(Fore.CYAN + "- Diferencia Stop: "  + Fore.WHITE + "Es el valor más bajo permitido que utilizará el modelo como límite.\n")
+    print(Fore.YELLOW + "Nota Técnica: \n")
+    print("Este programa está desarrollado en Python, utilizando dos librerías muy potentes: NumPy y Pandas, ampliamente usadas en investigación y ciencia de datos.")
+    print("Ambas librerías permiten ejecutar modelos matemáticos para encontrar soluciones mediante la selección de números aleatorios, siendo NumPy especialmente eficiente por su uso de matrices.\n")
+    print(Fore.CYAN + "- NumPy: " + Fore.WHITE + "Librería de Python para trabajar con arrays y realizar cálculos numéricos de forma rápida.")
+    print(Fore.CYAN + "- Pandas: " + Fore.WHITE + "Librería para manipular y analizar datos estructurados, como si fueran hojas de cálculo.\n")
+    print(Fore.YELLOW + "Más info: \n")
+    print(Fore.CYAN + "- Python: " + Fore.WHITE + "https://es.wikipedia.org/wiki/Python")
+    print(Fore.CYAN + "- NumPy: " + Fore.WHITE + "https://es.wikipedia.org/wiki/NumPy")
+    print(Fore.CYAN + "- Pandas: " + Fore.WHITE + "https://es.wikipedia.org/wiki/Pandas_(software) \n")
+    print(Fore.YELLOW + " \n")
+    print("Si necesita más ayuda consultar con " + Fore.RED + "SteveCarpio" + Fore.WHITE + " - " + Fore.GREEN + "Python-v1.2025")
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
@@ -88,17 +116,14 @@ def limpiar_pantalla():
 # Menú interactivo
 def mostrar_menu():
     limpiar_pantalla()
-
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
-
     print(Fore.CYAN + "- File de Entrada:  " + str(nombre_Entrada) + "." + str(v11))
     print(Fore.CYAN + "- Importe Fijado:   " + str(importe_Fijado))
     print(Fore.CYAN + "- Núm Simulaciones: " + str(num_Simulaciones))
     print(Fore.CYAN + "- Diferencia Menor: " + str(diferencia_Menor))
     print(Fore.CYAN + "- Diferencia Stop:  " + str(diferencia_Stop))
-
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE   + "0) ⚪ Ejecutar Modelo Numpy y Pandas")
     print(Fore.YELLOW  + "1) 🟡 Ejecutar Modelo Numpy ")
@@ -131,9 +156,7 @@ def ejecutar_menu():
             print(Fore.RED + "\n ❌ Opción no válida, por favor elige una opción válida ❌\n")
         
         # Pausa para que el usuario vea los resultados
-        input(Fore.WHITE + f'\n------------- [ Pulse una tecla para volver al menú - {dt.now()} ] -------------')
+        input(Fore.MAGENTA + f'\n------------- [ Pulse una tecla para volver al menú - {dt.now()} ] -------------')
 
-
-#input(Fore.WHITE + "Presiona Enter para continuar...")
 ejecutar_menu()
 

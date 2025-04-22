@@ -47,14 +47,14 @@ def Leer_desde_txt(nombre_Entrada, nombre_Salida):
     df.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
 
     # Mostrar el DataFrame
-    print(f"Importación del Fichero : {nombre_Entrada}.txt")
-    print(f"Encoding : {encoding}")
-    print(f"Número de Registros Leídos: {len(df)}")
-    print(df.head(3))
+    print(f"Nombre del Fichero  : {nombre_Entrada}.txt")
+    print(f"Número de Registros : {len(df)}")
+    print(f"Encoding de Entrada : {encoding}")
+    
     return df
 
 def sTv_paso1(nombre_Entrada, nombre_Salida, v1):
-    print(f'\n------------- [ Paso 1 - {dt.now()} ]------------- \n')
+    print(Fore.CYAN + f'\n------------- [ Paso 1: Importación del Fichero de Entrada ]------------- \n')
     if v1 == "1":
         df = Leer_desde_txt(nombre_Entrada, nombre_Salida)
     if v1 == "2":

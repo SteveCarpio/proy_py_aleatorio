@@ -4,7 +4,7 @@ import cfg.ALEATORIO_variables as sTv
 # --- Función que nos quita los prestamos que no queremos a partir de un excel
 def sTv_paso2(df1):
 
-    print(f'\n------------- [ Paso 2 - {dt.now()} ]------------- \n')
+    print(Fore.CYAN + f'\n------------- [ Paso 2: Tratamiento del Fichero de Entrada ]------------- \n')
 
     # Leemos el excel de PRESTAMOS a eliminar
     df2= pd.read_excel(f'{sTv.var_RutaConfig}QUITAR_PRESTAMOS.xlsx')
@@ -21,9 +21,15 @@ def sTv_paso2(df1):
     # Filtrar los registros que están en A pero no en B
     df3 = df1[~df1['ID'].isin(merged['ID'])]
     df3 = df3.reset_index(drop=True)  # Reinicio indices
+    # Totales
+    var_total1 = df1['TOTAL'].sum()
+    var_total3 = df3['TOTAL'].sum()
 
-    print(f"Número de registros de Entrada : {len(df1)}")
-    print(f"Prestamos eliminados           : {len(df2)}")
-    print(f"Número de registros a Procesar : {len(df3)}\n")
+    print(f"Número de Registros de Entrada : {len(df1)}")
+    print(f"Importe total                  : {var_total1}\n ")
+
+    print(f"Número de Préstamos eliminados : {len(df2)}")
+    print(f"Número de Registros a Procesar : {len(df3)}")
+    print(f"Importe total                  : {var_total3}\n ")
 
     return df3
