@@ -2,10 +2,13 @@ from   cfg.ALEATORIO_librerias import *
 import cfg.ALEATORIO_variables as sTv
 
 # --- Función que nos sirve para importar el fichero de entrada .txt
-def sTv_paso1(nombre_Entrada, nombre_Salida):
-    
-    print(f'\n------------- [ Paso 1 - {dt.now()} ]------------- \n')
+def Leer_desde_excel(nombre_Entrada, nombre_Salida):
+    print("Leemos el file de EXCEL")
+    print("Este modo no esta creado....")
+    sys.exit(0)
 
+# --- Función que nos sirve para importar el fichero de entrada .txt
+def Leer_desde_txt(nombre_Entrada, nombre_Salida):
     # Inicializar listas vacías para cada campo
     campo1_list = []
     campo2_list = []
@@ -44,6 +47,16 @@ def sTv_paso1(nombre_Entrada, nombre_Salida):
     df.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
 
     # Mostrar el DataFrame
-    print(f"Importación del Fichero : {nombre_Entrada}.txt \nEncoding : {encoding}\n")
-    print(df)
+    print(f"Importación del Fichero : {nombre_Entrada}.txt")
+    print(f"Encoding : {encoding}")
+    print(f"Número de Registros Leídos: {len(df)}")
+    print(df.head(3))
+    return df
+
+def sTv_paso1(nombre_Entrada, nombre_Salida, v1):
+    print(f'\n------------- [ Paso 1 - {dt.now()} ]------------- \n')
+    if v1 == "1":
+        df = Leer_desde_txt(nombre_Entrada, nombre_Salida)
+    if v1 == "2":
+        df = Leer_desde_excel(nombre_Entrada, nombre_Salida)
     return df

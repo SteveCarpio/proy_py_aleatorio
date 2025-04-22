@@ -97,11 +97,11 @@ def sTv_paso3(df3, num_Simulaciones, importe_Fijado, diferencia_Menor, diferenci
             break
 
     if sw == 0:
-        print(f"\n----------")
-        print(f"Lo sentimos no hubo un resultado, pruebe con otro valor para:")
-        print(f"- NumSimulaciones: {num_Simulaciones}")
-        print(f"- DiferenciaMenor: {diferencia_Menor}")
-        print(f"- Diferencia Stop: {diferencia_Stop}")
+        print(f"\n")
+        print(Fore.CYAN + f"** Lo sentimos no hubo un resultado con los valores introducidos, pruebe con otro valores:\n")
+        print(f"- Num Simulaciones: {num_Simulaciones}")
+        print(f"- Diferencia Menor: {diferencia_Menor}")
+        print(f"- Diferencia Stop : {diferencia_Stop}")
         
         print(f'\n- Importe Fijado : {importe_Fijado}')
         print(f'- Importe Total  : {var_total}')  
