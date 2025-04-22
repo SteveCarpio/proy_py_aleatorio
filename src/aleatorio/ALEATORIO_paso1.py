@@ -3,9 +3,17 @@ import cfg.ALEATORIO_variables as sTv
 
 # --- Función que nos sirve para importar el fichero de entrada .txt
 def Leer_desde_excel(nombre_Entrada, nombre_Salida):
-    print("Leemos el file de EXCEL")
-    print("Este modo no esta creado....")
-    sys.exit(0)
+    
+    df = pd.read_excel(f'{sTv.var_RutaFileIn}{nombre_Entrada}.xlsx')
+
+    # Exporto el DataFrame a un excel para tenerlo
+    df.to_excel(f'{sTv.var_RutaInforme}{nombre_Salida}.xlsx', index=False)
+
+    # Mostrar el DataFrame
+    print(f"Nombre del Fichero  : {nombre_Entrada}.txt")
+    print(f"Número de Registros : {len(df)}")
+    
+    return df
 
 # --- Función que nos sirve para importar el fichero de entrada .txt
 def Leer_desde_txt(nombre_Entrada, nombre_Salida):

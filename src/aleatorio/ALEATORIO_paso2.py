@@ -28,7 +28,7 @@ def sTv_paso2(df1):
     print(f"Número de Registros de Entrada : {len(df1)}")
     print(f"Importe total                  : {var_total1}\n ")
 
-    print(f"Número de Préstamos eliminados : {len(df2)}")
+    print(f"Número de Préstamos a eliminar : {len(df2)}")
     print(f"Número de Registros a Procesar : {len(df3)}")
     print(f"Importe total                  : {var_total3}\n ")
 
